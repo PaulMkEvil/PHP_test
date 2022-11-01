@@ -5,7 +5,7 @@ services:
     build: ./server
     restart: always
     volumes:
-      - ./server:/var/www/html
+      - ./server:/usr/local/apache2/htdocs/
     ports:
       - "8080:80"
     depends_on:
