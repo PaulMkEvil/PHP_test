@@ -33,3 +33,9 @@ services:
       - "8081:80"
     links:
       - db
+
+  redis:
+    image: redis:alpine3.16
+    restart: always
+    ports:
+      - "6379:6379"
