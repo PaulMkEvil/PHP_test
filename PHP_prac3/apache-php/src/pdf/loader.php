@@ -9,6 +9,8 @@
         }
 
         body {
+            height: 100%;
+            width: 100%;
             background-image: url(https://2.bp.blogspot.com/-T4DKrOaEZA8/XR_GXTi1TzI/AAAAAAAAEQc/uAY-2EA2gL0KR-VbLqTwcGndltyToh76QCKgBGAs/w0/toy-story-4-characters-uhdpaper.com-4K-27.jpg);
             background-size: cover;
         }
@@ -29,7 +31,7 @@
         .container {
             background: white;
             width: 450px;
-            height: 500px;
+            height: 700px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,13 +40,30 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Магазин Игрушек</h1><br>
-    <a href="/catalogue.php">Каталог</a>
-    <a href="/admin/admin.php">Админ Панель</a>
-    <a href="/about.html">О нас</a>
-    <a href="/pdf/loader.php">PDF файлы</a>
-    <a href="/language/page.php">Язык, сессии, темы</a>
-</div>
+<form class="container" enctype="multipart/form-data" action="uploadpdf.php" method="POST">
+    <div>
+    <input type="hidden" name="MAX_FILE_SIZE" value="2000000"/>
+    <br>
+    <label class="custom-file-label" for="file_field">Отправить этот файл:</label>
+    <br>
+    <input class="custom-file-input" id="file_field" name="userfile" type="file"/>
+    </div>
+    <br>
+    <input  type="submit" value="Отправить файл"/>
+
+    <?php
+$files = scandir('./files');
+if (count($files) <= 2) {
+    echo "<h2>Нет загруженных файлов</h2>";
+} else {
+    echo "<h2>Загруженные файлы</h2>";
+    foreach ($files as $file) {
+        if ($file != "." and $file != "..") {
+            echo "<div ><a  href='http://localhost:8080/pdf/uploadpdf/".$file."' download>".$file."</a></div>";
+        }
+    }
+}
+?>
+</form>
 </body>
 </html>
